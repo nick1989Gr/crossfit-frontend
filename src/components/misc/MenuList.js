@@ -4,6 +4,7 @@ import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 import { menuOptionsData } from "../../utils/menuOptionsData";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TitlebarGridList() {
   const classes = useStyles();
+  let history = useHistory();
 
   return (
     <div className={classes.root}>
@@ -39,7 +41,7 @@ export default function TitlebarGridList() {
               className={classes.image}
               src={tile.img}
               alt={tile.title}
-              onClick={() => console.log("Hello")}
+              onClick={() => history.push(tile.path)}
             />
             <GridListTileBar
               title={tile.title}
