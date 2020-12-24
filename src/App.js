@@ -5,6 +5,7 @@ import { Switch, Route } from "react-router-dom";
 import MenuList from "./components/misc/MenuList";
 import AthletesTable from "./components/AthletesTable";
 import Instructors from "./components/Instructors";
+import Schedule from "./components/Schedule";
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         </Route>
         <Route exact path="/instructors">
           <Instructors />
+        </Route>
+        <Route exact path="/Schedule">
+          <Schedule />
         </Route>
         <Route path="/">
           <PageNotFound />
