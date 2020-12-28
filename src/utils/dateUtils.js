@@ -3,7 +3,7 @@ export const FIRST = 0;
 export const LAST = NUM_WEEK_DAYS - 1;
 
 // Formats date to Day dd Mon
-export function formatDate(d) {
+export function formatDateVerbose(d) {
   const months = [
     "JAN",
     "FEB",
@@ -20,6 +20,18 @@ export function formatDate(d) {
   ];
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[d.getDay()] + " " + d.getDate() + " " + months[d.getMonth()];
+}
+
+export function formatDate(date) {
+  var d = new Date(date),
+    month = "" + (d.getMonth() + 1),
+    day = "" + d.getDate(),
+    year = d.getFullYear();
+
+  if (month.length < 2) month = "0" + month;
+  if (day.length < 2) day = "0" + day;
+
+  return [year, month, day].join("-");
 }
 
 export function getWeekDays(startDay) {

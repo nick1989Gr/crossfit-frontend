@@ -7,16 +7,19 @@ import {
   TableRow,
   TableCell,
   makeStyles,
+  Button,
 } from "@material-ui/core/";
+import AddIcon from "@material-ui/icons/Add";
+import CloseIcon from "@material-ui/icons/Close";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import IconButton from "@material-ui/core/IconButton";
 import {
   formatDate,
+  formatDateVerbose,
   getPreviousWeekDate,
   getNextWeekDate,
   getWeekDays,
-  NUM_WEEK_DAYS,
   FIRST,
   LAST,
 } from "../utils/dateUtils";
@@ -61,6 +64,9 @@ const useStyles = makeStyles({
     textAlign: "center",
     fontWeight: "bold",
   },
+  button: {
+    margin: 1,
+  },
 });
 
 export const Schedule = () => {
@@ -85,6 +91,42 @@ export const Schedule = () => {
   if (loading) return <Loading />;
   if (error) throw error;
   console.log(schedule);
+
+  const getButtonStyle = (buttonType, availableSlots) => {
+    if (availableSlots === 0) buttonType = "no room left";
+    const noRoomButton = {
+      backgroundColor: "#ff5722",
+    };
+    const wodButton = {
+      backgroundColor: "#80cbc4",
+    };
+    const calisthenicsButton = {
+      backgroundColor: "#cddc39",
+    };
+    const weightLiftingButton = {
+      backgroundColor: "#43a047",
+    };
+    const defaultButton = {
+      backgroundColor: "#b39ddb",
+    };
+
+    switch (buttonType) {
+      case "wod":
+        return wodButton;
+      case "calisthenics":
+        return calisthenicsButton;
+      case "weight lifting":
+        return weightLiftingButton;
+      case "no room left":
+        return noRoomButton;
+      default:
+        return defaultButton;
+    }
+  };
+
+  const getButtonIcon = (availableSlots) => {
+    return availableSlots === 0 ? <CloseIcon /> : <AddIcon />;
+  };
 
   const getCallendarHeader = () => {
     return (
@@ -123,7 +165,7 @@ export const Schedule = () => {
           <TableCell className={classes.headerCell}>Time</TableCell>
           {getWeekDays(startDay).map((d, i) => (
             <TableCell className={classes.headerCell} key={i}>
-              {formatDate(d)}
+              {formatDateVerbose(d)}
             </TableCell>
           ))}
         </TableRow>
@@ -137,11 +179,32 @@ export const Schedule = () => {
         {WORKING_HOURS.map((hour) => (
           <TableRow key={hour}>
             <TableCell>{hour}</TableCell>
-            {Array.from(Array(NUM_WEEK_DAYS), (_, index) => index + 1).map(
-              (i) => (
-                <TableCell key={i}>a</TableCell>
-              )
-            )}
+            {getWeekDays(startDay).map((day) => (
+              <TableCell key={day}>
+                {schedule
+                  .filter((c) => {
+                    if (
+                      c.classTime === hour &&
+                      c.classDate === formatDate(day)
+                    ) {
+                      return c;
+                    }
+                  })
+                  .map((c, i) => (
+                    <Button
+                      style={getButtonStyle(c.classType, c.availableSlots)}
+                      key={i}
+                      variant="contained"
+                      size="small"
+                      color="inherit"
+                      className={classes.button}
+                      endIcon={getButtonIcon(c.availableSlots)}
+                    >
+                      {c.classType}({c.availableSlots})
+                    </Button>
+                  ))}
+              </TableCell>
+            ))}
           </TableRow>
         ))}
       </>
