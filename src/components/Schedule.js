@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   TableContainer,
   Table,
@@ -17,21 +17,25 @@ import {
   getNextWeekDate,
   getWeekDays,
   NUM_WEEK_DAYS,
+  FIRST,
+  LAST,
 } from "../utils/dateUtils";
+import Loading from "../components/misc/Loading";
+import { getSchedule } from "../api/scheduleApi";
 
 const WORKING_HOURS = [
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-  "18:00",
-  "19:00",
-  "20:00",
-  "21:00",
+  "10:00:00",
+  "11:00:00",
+  "12:00:00",
+  "13:00:00",
+  "14:00:00",
+  "15:00:00",
+  "16:00:00",
+  "17:00:00",
+  "18:00:00",
+  "19:00:00",
+  "20:00:00",
+  "21:00:00",
 ];
 const useStyles = makeStyles({
   container: {
@@ -62,6 +66,25 @@ const useStyles = makeStyles({
 export const Schedule = () => {
   const classes = useStyles();
   const [startDay, setStartDay] = useState(new Date());
+  const [schedule, setSchedule] = useState(null);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const weekDays = getWeekDays(startDay);
+    getSchedule(weekDays[FIRST], weekDays[LAST])
+      .then((r) => {
+        setSchedule(r);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  }, [startDay]);
+
+  if (loading) return <Loading />;
+  if (error) throw error;
+  console.log(schedule);
 
   const getCallendarHeader = () => {
     return (

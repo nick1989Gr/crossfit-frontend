@@ -1,4 +1,6 @@
 export const NUM_WEEK_DAYS = 7;
+export const FIRST = 0;
+export const LAST = NUM_WEEK_DAYS - 1;
 
 // Formats date to Day dd Mon
 export function formatDate(d) {
@@ -23,7 +25,7 @@ export function formatDate(d) {
 export function getWeekDays(startDay) {
   let days = [];
   days[0] = new Date(startDay);
-  for (let i = 1; i < 7; i++) {
+  for (let i = 1; i < NUM_WEEK_DAYS; i++) {
     days[i] = new Date();
     days[i].setDate(startDay.getDate() + i);
   }
