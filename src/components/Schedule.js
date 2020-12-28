@@ -57,7 +57,7 @@ const useStyles = makeStyles({
     top: 20,
   },
   tableHeader: {
-    backgroundColor: "#9F3410",
+    backgroundColor: "#424242",
   },
   headerCell: {
     color: "#FFFFFF",
@@ -182,14 +182,10 @@ export const Schedule = () => {
             {getWeekDays(startDay).map((day) => (
               <TableCell key={day}>
                 {schedule
-                  .filter((c) => {
-                    if (
-                      c.classTime === hour &&
-                      c.classDate === formatDate(day)
-                    ) {
-                      return c;
-                    }
-                  })
+                  .filter(
+                    (c) =>
+                      c.classTime === hour && c.classDate === formatDate(day)
+                  )
                   .map((c, i) => (
                     <Button
                       style={getButtonStyle(c.classType, c.availableSlots)}
