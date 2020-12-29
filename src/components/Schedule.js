@@ -8,6 +8,8 @@ import {
   TableCell,
   makeStyles,
   Button,
+  Dialog,
+  DialogContent,
 } from "@material-ui/core/";
 import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
@@ -25,6 +27,7 @@ import {
 } from "../utils/dateUtils";
 import Loading from "../components/misc/Loading";
 import { getSchedule } from "../api/scheduleApi";
+import Registration from "./Registration";
 
 const WORKING_HOURS = [
   "10:00:00",
@@ -75,6 +78,11 @@ export const Schedule = () => {
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [popup, setPopup] = useState({
+    open: false,
+    id: null,
+    availableSlots: null,
+  });
 
   useEffect(() => {
     const weekDays = getWeekDays(startDay);
@@ -195,6 +203,13 @@ export const Schedule = () => {
                       color="inherit"
                       className={classes.button}
                       endIcon={getButtonIcon(c.availableSlots)}
+                      onClick={() => {
+                        setPopup({
+                          open: true,
+                          id: c.crossfitClassId,
+                          availableSlots: c.availableSlots,
+                        });
+                      }}
                     >
                       {c.classType}({c.availableSlots})
                     </Button>
@@ -207,6 +222,33 @@ export const Schedule = () => {
     );
   };
 
+  const getPopUpWindow = () => {
+    return (
+      <>
+        {popup.open && (
+          <Dialog
+            open={popup.open}
+            onClose={() =>
+              setPopup({
+                open: false,
+                id: null,
+                availableSlots: null,
+              })
+            }
+            fullWidth={true}
+          >
+            <DialogContent>
+              <Registration
+                availableSlots={popup.availableSlots}
+                id={popup.id}
+              />
+            </DialogContent>
+          </Dialog>
+        )}
+      </>
+    );
+  };
+
   return (
     <>
       <TableContainer className={classes.container}>
@@ -215,6 +257,7 @@ export const Schedule = () => {
           <TableBody>{getCallendarBody()}</TableBody>
         </Table>
       </TableContainer>
+      {getPopUpWindow()}
     </>
   );
 };

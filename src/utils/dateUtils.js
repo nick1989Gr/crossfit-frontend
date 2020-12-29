@@ -34,6 +34,11 @@ export function formatDate(date) {
   return [year, month, day].join("-");
 }
 
+// Takes a date and retuns the time as HH:MM:SS
+export function formatTime(date) {
+  return date.toTimeString().split(" ")[0];
+}
+
 export function getWeekDays(startDay) {
   let days = [];
   days[0] = new Date(startDay);

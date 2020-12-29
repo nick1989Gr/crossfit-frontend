@@ -40,7 +40,6 @@ export const Instructors = () => {
                 header={`${instructor.firstName} ${instructor.lastName}`}
                 meta={instructor.email}
                 description={instructor.bio}
-                // extra={extra}
               />
             </Grid>
           ))}
@@ -48,20 +47,6 @@ export const Instructors = () => {
       </Grid>
     </div>
   );
-  // return instructors.map((instructor) => (
-  //   <Card
-  //     key={instructor.id}
-  //     image={
-  //       instructor.image
-  //         ? instructor.image
-  //         : "https://react.semantic-ui.com/images/avatar/large/elliot.jpg"
-  //     }
-  //     header={`${instructor.firstName} ${instructor.lastName}`}
-  //     meta={instructor.email}
-  //     description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
-  //     // extra={extra}
-  //   />
-  // ));
 };
 
 export default Instructors;
