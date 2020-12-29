@@ -16,3 +16,14 @@ export function registerAthleteToClass(athleteId, classId) {
   };
   return fetch(url, options).then(handleResponse).catch(handleError);
 }
+
+export function unregisterAthleteToClass(athleteId, classId) {
+  const url = `${API_HOST}/api/v1/classes/registration/${athleteId}/${classId}`;
+  console.log(" Unregistering athlete:" + athleteId + " to class:" + classId);
+  const options = {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({}),
+  };
+  return fetch(url, options).then(handleResponse).catch(handleError);
+}

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import {
   getClassInfo,
   registerAthleteToClass,
+  unregisterAthleteToClass,
 } from "../api/crossfitClassesApi";
 import Loading from "../components/misc/Loading";
 import { Card, Image } from "semantic-ui-react";
 import { formatDateVerbose, formatTime } from "../utils/dateUtils";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core/";
 import Alert from "@material-ui/lab/Alert";
 import { currentUserId } from "../globalVars";
@@ -87,25 +89,35 @@ export const Registration = (props) => {
     );
   };
 
-  const getEnrollButton = () => {
+  const getRegisterButton = () => {
     return (
       <>
         {classInfo.athletes.some((a) => a.id === currentUserId) ? (
-          <Alert severity="success">You are enrolled for this class</Alert>
-        ) : props.availableSlots !== 0 ? (
           <>
-            <Alert severity="info">
-              {props.availableSlots} available slots
-            </Alert>
+            <Alert severity="success">You are enrolled for this class</Alert>
+            <Button
+              style={{ margin: 15 }}
+              variant="contained"
+              size="large"
+              color="inherit"
+              endIcon={<DeleteIcon />}
+              onClick={() => unregisterAthlete()}
+            >
+              Unregister
+            </Button>
+          </>
+        ) : getAvailableSlots() !== 0 ? (
+          <>
+            <Alert severity="info">{getAvailableSlots()} available slots</Alert>
             <Button
               style={{ margin: 15 }}
               variant="contained"
               size="large"
               color="inherit"
               endIcon={<BorderColorIcon />}
-              onClick={() => enrollAthlete()}
+              onClick={() => registerAthlete()}
             >
-              Enroll
+              Register
             </Button>
           </>
         ) : (
@@ -115,12 +127,24 @@ export const Registration = (props) => {
     );
   };
 
-  const enrollAthlete = () => {
+  const registerAthlete = () => {
     registerAthleteToClass(currentUserId, classInfo.id)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
       });
+  };
+
+  const unregisterAthlete = () => {
+    unregisterAthleteToClass(currentUserId, classInfo.id)
+      .then((r) => updateClassInfo())
+      .catch((e) => {
+        throw e;
+      });
+  };
+
+  const getAvailableSlots = () => {
+    return classInfo.maxParticipants - classInfo.athletes.length;
   };
 
   if (loading) return <Loading />;
@@ -133,7 +157,7 @@ export const Registration = (props) => {
         {classInfo.type} | {formatDateVerbose(new Date(classInfo.ts))} |{" "}
         {formatTime(new Date(classInfo.ts))}
       </h1>
-      {getEnrollButton()}
+      {getRegisterButton()}
 
       {getInstructorCard()}
       {getAthletesCards()}

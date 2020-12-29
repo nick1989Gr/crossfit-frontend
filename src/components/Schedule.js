@@ -80,7 +80,7 @@ export const Schedule = () => {
   const [loading, setLoading] = useState(true);
   const [popup, setPopup] = useState({
     open: false,
-    id: null,
+    classId: null,
     availableSlots: null,
   });
 
@@ -211,7 +211,7 @@ export const Schedule = () => {
                       onClick={() => {
                         setPopup({
                           open: true,
-                          id: c.crossfitClassId,
+                          classId: c.crossfitClassId,
                           availableSlots: c.availableSlots,
                         });
                       }}
@@ -236,7 +236,7 @@ export const Schedule = () => {
             onClose={() => {
               setPopup({
                 open: false,
-                id: null,
+                classId: null,
                 availableSlots: null,
               });
               updateSchedule();
@@ -244,10 +244,7 @@ export const Schedule = () => {
             fullWidth={true}
           >
             <DialogContent>
-              <Registration
-                availableSlots={popup.availableSlots}
-                id={popup.id}
-              />
+              <Registration id={popup.classId} />
             </DialogContent>
           </Dialog>
         )}
