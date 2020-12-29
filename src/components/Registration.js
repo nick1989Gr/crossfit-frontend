@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { getClassInfo } from "../api/crossfitClassesApi";
+import {
+  getClassInfo,
+  registerAthleteToClass,
+} from "../api/crossfitClassesApi";
 import Loading from "../components/misc/Loading";
 import { Card, Image } from "semantic-ui-react";
 import { formatDateVerbose, formatTime } from "../utils/dateUtils";
@@ -13,13 +16,18 @@ export const Registration = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
+  const updateClassInfo = () => {
     getClassInfo(props.id)
       .then((r) => {
         setClassInfo(r);
         setLoading(false);
       })
       .catch((e) => setError(e));
+  };
+
+  useEffect(() => {
+    updateClassInfo();
+    // eslint-disable-next-line
   }, []);
 
   const getInstructorCard = () => {
@@ -83,7 +91,7 @@ export const Registration = (props) => {
     return (
       <>
         {classInfo.athletes.some((a) => a.id === currentUserId) ? (
-          <Alert severity="success">Already Enrolled</Alert>
+          <Alert severity="success">You are enrolled for this class</Alert>
         ) : props.availableSlots !== 0 ? (
           <>
             <Alert severity="info">
@@ -95,7 +103,7 @@ export const Registration = (props) => {
               size="large"
               color="inherit"
               endIcon={<BorderColorIcon />}
-              onClick={enrollAthlete()}
+              onClick={() => enrollAthlete()}
             >
               Enroll
             </Button>
@@ -108,12 +116,15 @@ export const Registration = (props) => {
   };
 
   const enrollAthlete = () => {
-    // TODO
+    registerAthleteToClass(currentUserId, classInfo.id)
+      .then((r) => updateClassInfo())
+      .catch((e) => {
+        throw e;
+      });
   };
 
   if (loading) return <Loading />;
   if (error) throw error;
-  console.log(classInfo);
 
   // Handle what happens in case of no space left
   return (
