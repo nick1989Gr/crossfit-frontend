@@ -84,7 +84,7 @@ export const Schedule = () => {
     availableSlots: null,
   });
 
-  useEffect(() => {
+  const updateSchedule = () => {
     const weekDays = getWeekDays(startDay);
     getSchedule(weekDays[FIRST], weekDays[LAST])
       .then((r) => {
@@ -94,11 +94,16 @@ export const Schedule = () => {
       .catch((error) => {
         setError(error);
       });
+  };
+
+  useEffect(() => {
+    updateSchedule();
+    // eslint-disable-next-line
   }, [startDay]);
 
   if (loading) return <Loading />;
   if (error) throw error;
-  console.log(schedule);
+  // console.log(schedule);
 
   const getButtonStyle = (buttonType, availableSlots) => {
     if (availableSlots === 0) buttonType = "no room left";
@@ -228,13 +233,14 @@ export const Schedule = () => {
         {popup.open && (
           <Dialog
             open={popup.open}
-            onClose={() =>
+            onClose={() => {
               setPopup({
                 open: false,
                 id: null,
                 availableSlots: null,
-              })
-            }
+              });
+              updateSchedule();
+            }}
             fullWidth={true}
           >
             <DialogContent>
