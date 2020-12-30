@@ -15,6 +15,7 @@ import AddIcon from "@material-ui/icons/Add";
 import CloseIcon from "@material-ui/icons/Close";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import HowToRegIcon from "@material-ui/icons/HowToReg";
 import IconButton from "@material-ui/core/IconButton";
 import {
   formatDate,
@@ -26,8 +27,9 @@ import {
   LAST,
 } from "../utils/dateUtils";
 import Loading from "../components/misc/Loading";
-import { getSchedule } from "../api/scheduleApi";
+import { getScheduleForAthlete } from "../api/scheduleApi";
 import Registration from "./Registration";
+import { currentUserId } from "../globalVars";
 
 const WORKING_HOURS = [
   "10:00:00",
@@ -86,7 +88,7 @@ export const Schedule = () => {
 
   const updateSchedule = () => {
     const weekDays = getWeekDays(startDay);
-    getSchedule(weekDays[FIRST], weekDays[LAST])
+    getScheduleForAthlete(weekDays[FIRST], weekDays[LAST], currentUserId)
       .then((r) => {
         setSchedule(r);
         setLoading(false);
@@ -137,7 +139,8 @@ export const Schedule = () => {
     }
   };
 
-  const getButtonIcon = (availableSlots) => {
+  const getButtonIcon = (availableSlots, athleteIsEnrolled) => {
+    if (athleteIsEnrolled) return <HowToRegIcon />;
     return availableSlots === 0 ? <CloseIcon /> : <AddIcon />;
   };
 
@@ -207,7 +210,10 @@ export const Schedule = () => {
                       size="small"
                       color="inherit"
                       className={classes.button}
-                      endIcon={getButtonIcon(c.availableSlots)}
+                      endIcon={getButtonIcon(
+                        c.availableSlots,
+                        c.athleteEnrolled
+                      )}
                       onClick={() => {
                         setPopup({
                           open: true,
