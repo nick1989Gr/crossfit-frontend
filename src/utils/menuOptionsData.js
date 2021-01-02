@@ -35,4 +35,10 @@ export const menuOptionsData = [
     subtitle: "Book your class",
     path: "/schedule",
   },
+  {
+    img: schedule,
+    title: "Profile",
+    subtitle: "look at your profile",
+    path: "/profile",
+  },
 ];

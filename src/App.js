@@ -6,6 +6,7 @@ import MenuList from "./components/misc/MenuList";
 import AthletesTable from "./components/AthletesTable";
 import Instructors from "./components/Instructors";
 import Schedule from "./components/Schedule";
+import Profile from "./components/Profile";
 
 function App() {
   return (
@@ -23,6 +24,9 @@ function App() {
         </Route>
         <Route exact path="/Schedule">
           <Schedule />
+        </Route>
+        <Route exact path="/profile">
+          <Profile />
         </Route>
         <Route path="/">
           <PageNotFound />

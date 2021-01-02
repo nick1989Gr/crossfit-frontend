@@ -36,7 +36,7 @@ export default function TitlebarGridList() {
           style={{ height: "auto" }}
         ></GridListTile>
         {menuOptionsData.map((tile) => (
-          <GridListTile key={tile.img}>
+          <GridListTile key={tile.title}>
             <img
               className={classes.image}
               src={tile.img}

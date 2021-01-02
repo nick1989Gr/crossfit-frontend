@@ -6,11 +6,20 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ErrorBoundary from "./ErrorBoundary";
 import { BrowserRouter } from "react-router-dom";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 ReactDOM.render(
   <ErrorBoundary>
     <BrowserRouter>
-      <App />
+      <Auth0Provider
+        domain="crossfitapp-dev.eu.auth0.com"
+        clientId="I9McoPMQ4kxhKDUhlJ9NILvXNvBB6U5G"
+        redirectUri="http://localhost:3000/"
+        audience="https://crossfitapp-dev.eu.auth0.com/api/v2/"
+        scope="read:current_user update:current_user_metadata"
+      >
+        <App />
+      </Auth0Provider>
     </BrowserRouter>
   </ErrorBoundary>,
   document.getElementById("root")

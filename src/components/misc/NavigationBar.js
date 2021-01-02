@@ -3,10 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import HomeIcon from "@material-ui/icons/Home";
 import { useHistory } from "react-router-dom";
+import LoginButton from "./LoginButton";
+import LogoutButton from "./LogoutButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import Avatar from "@material-ui/core/Avatar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,11 +26,18 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "transparent",
     color: "#F9F6F5",
   },
+  avantar: {
+    display: "flex",
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
 }));
 
 export const NavigationBar = () => {
   const classes = useStyles();
   let history = useHistory();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const onHomeButtonClick = () => {
     history.push("/");
@@ -49,7 +59,14 @@ export const NavigationBar = () => {
           <Typography variant="h6" className={classes.title}>
             Crossfit App
           </Typography>
-          <Button color="inherit">Login</Button>
+          {!isAuthenticated ? (
+            <LoginButton />
+          ) : (
+            <div className={classes.avantar}>
+              <Avatar alt={user.name} src={user.picture} />
+              <LogoutButton />
+            </div>
+          )}
         </Toolbar>
       </AppBar>
     </div>
