@@ -3,6 +3,7 @@ import instructor from "../resources/images/instructor.jpg";
 import classes from "../resources/images/classes.PNG";
 import schedule from "../resources/images/schedule.PNG";
 import achievements from "../resources/images/achievements.PNG";
+import profile from "../resources/images/profile.PNG";
 
 export const menuOptionsData = [
   {
@@ -36,7 +37,7 @@ export const menuOptionsData = [
     path: "/schedule",
   },
   {
-    img: schedule,
+    img: profile,
     title: "Profile",
     subtitle: "look at your profile",
     path: "/profile",

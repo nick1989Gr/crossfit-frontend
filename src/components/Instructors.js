@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { useAuthFetch } from "../services/useAuthFetch";
 import Loading from "../components/misc/Loading";
+import LoginAlert from "../components/misc/LoginAlert";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -24,7 +25,7 @@ export const Instructors = () => {
     "/api/v1/instructors"
   );
 
-  if (!isAuthenticated) return <p>You need to log in first</p>;
+  if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) throw error;
 

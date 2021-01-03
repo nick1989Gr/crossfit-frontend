@@ -8,8 +8,9 @@ import {
   TableCell,
   makeStyles,
 } from "@material-ui/core/";
-import { useFetch } from "../services/useFetch";
+import { useAuthFetch } from "../services/useAuthFetch";
 import Loading from "../components/misc/Loading";
+import LoginAlert from "../components/misc/LoginAlert";
 
 const useStyles = makeStyles({
   container: {
@@ -37,8 +38,11 @@ const useStyles = makeStyles({
 
 export const AthletesTable = () => {
   const classes = useStyles();
-  const { data: athletes, loading, error } = useFetch("/api/v1/athletes");
+  const { data: athletes, loading, error, isAuthenticated } = useAuthFetch(
+    "/api/v1/athletes"
+  );
 
+  if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) throw error;
 
