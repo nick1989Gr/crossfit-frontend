@@ -91,7 +91,7 @@ export const Schedule = () => {
 
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  async function updateSchedule () {
+  async function updateSchedule() {
     const accessToken = await getToken(getAccessTokenSilently);
     const weekDays = getWeekDays(startDay);
     getScheduleForAthlete(
@@ -107,7 +107,7 @@ export const Schedule = () => {
       .catch((error) => {
         setError(error);
       });
-  };
+  }
 
   useEffect(() => {
     updateSchedule();

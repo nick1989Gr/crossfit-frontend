@@ -5,6 +5,7 @@ import {
   unregisterAthleteToClass,
 } from "../api/crossfitClassesApi";
 import Loading from "../components/misc/Loading";
+import LoginAlert from "../components/misc/LoginAlert";
 import { Card, Image } from "semantic-ui-react";
 import { formatDateVerbose, formatTime } from "../utils/dateUtils";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
@@ -12,11 +13,14 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core/";
 import Alert from "@material-ui/lab/Alert";
 import { currentUserId } from "../globalVars";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getToken } from "../utils/authenticationUtils.js";
 
 export const Registration = (props) => {
   const [classInfo, setClassInfo] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   const updateClassInfo = () => {
     getClassInfo(props.id)
@@ -127,26 +131,29 @@ export const Registration = (props) => {
     );
   };
 
-  const registerAthlete = () => {
-    registerAthleteToClass(currentUserId, classInfo.id)
+  async function registerAthlete() {
+    const accessToken = await getToken(getAccessTokenSilently);
+    registerAthleteToClass(currentUserId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
       });
-  };
+  }
 
-  const unregisterAthlete = () => {
-    unregisterAthleteToClass(currentUserId, classInfo.id)
+  async function unregisterAthlete() {
+    const accessToken = await getToken(getAccessTokenSilently);
+    unregisterAthleteToClass(currentUserId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
       });
-  };
+  }
 
   const getAvailableSlots = () => {
     return classInfo.maxParticipants - classInfo.athletes.length;
   };
 
+  if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) throw error;
 
