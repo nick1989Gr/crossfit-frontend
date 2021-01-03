@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export const NavigationBar = () => {
   const classes = useStyles();
   let history = useHistory();
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
 
   const onHomeButtonClick = () => {
     history.push("/");

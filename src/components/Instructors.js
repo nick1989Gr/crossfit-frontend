@@ -2,10 +2,10 @@ import React from "react";
 import { Card } from "semantic-ui-react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import { useFetch } from "../services/useFetch";
+import { useAuthFetch } from "../services/useAuthFetch";
 import Loading from "../components/misc/Loading";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
@@ -19,8 +19,12 @@ const useStyles = makeStyles((theme) => ({
 
 export const Instructors = () => {
   const classes = useStyles();
-  const { data: instructors, loading, error } = useFetch("/api/v1/instructors");
 
+  const { data: instructors, error, loading, isAuthenticated } = useAuthFetch(
+    "/api/v1/instructors"
+  );
+
+  if (!isAuthenticated) return <p>You need to log in first</p>;
   if (loading) return <Loading />;
   if (error) throw error;
 

@@ -15,8 +15,8 @@ ReactDOM.render(
         domain="crossfitapp-dev.eu.auth0.com"
         clientId="I9McoPMQ4kxhKDUhlJ9NILvXNvBB6U5G"
         redirectUri="http://localhost:3000/"
-        audience="https://crossfitapp-dev.eu.auth0.com/api/v2/"
-        scope="read:current_user update:current_user_metadata"
+        audience="http://localhost:9090/"
+        scope="read:classes"
       >
         <App />
       </Auth0Provider>
