@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import ErrorBoundary from "./ErrorBoundary";
 import { BrowserRouter } from "react-router-dom";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { AUDIENCE } from "./globalVars";
 
 ReactDOM.render(
   <ErrorBoundary>
@@ -15,7 +16,7 @@ ReactDOM.render(
         domain="crossfitapp-dev.eu.auth0.com"
         clientId="I9McoPMQ4kxhKDUhlJ9NILvXNvBB6U5G"
         redirectUri="http://localhost:3000/"
-        audience="http://localhost:9090/"
+        audience={AUDIENCE}
         scope="read:classes"
       >
         <App />

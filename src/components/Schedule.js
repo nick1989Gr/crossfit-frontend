@@ -27,9 +27,12 @@ import {
   LAST,
 } from "../utils/dateUtils";
 import Loading from "../components/misc/Loading";
+import LoginAlert from "../components/misc/LoginAlert";
 import { getScheduleForAthlete } from "../api/scheduleApi";
 import Registration from "./Registration";
 import { currentUserId } from "../globalVars";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getToken } from "../utils/authenticationUtils.js";
 
 const WORKING_HOURS = [
   "10:00:00",
@@ -86,9 +89,17 @@ export const Schedule = () => {
     availableSlots: null,
   });
 
-  const updateSchedule = () => {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+
+  async function updateSchedule () {
+    const accessToken = await getToken(getAccessTokenSilently);
     const weekDays = getWeekDays(startDay);
-    getScheduleForAthlete(weekDays[FIRST], weekDays[LAST], currentUserId)
+    getScheduleForAthlete(
+      weekDays[FIRST],
+      weekDays[LAST],
+      currentUserId,
+      accessToken
+    )
       .then((r) => {
         setSchedule(r);
         setLoading(false);
@@ -103,6 +114,7 @@ export const Schedule = () => {
     // eslint-disable-next-line
   }, [startDay]);
 
+  if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) throw error;
   // console.log(schedule);
