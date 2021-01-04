@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## How to setup an auth0 account
+
+https://auth0.com/docs/quickstart/spa/react
+
 ## Available Scripts
 
 In the project directory, you can run:

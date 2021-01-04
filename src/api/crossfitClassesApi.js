@@ -1,7 +1,7 @@
 import { handleResponse, handleError } from "./apiUtils";
 import { API_HOST } from "../globalVars";
 
-export function getClassInfo(id, accessToken) {
+export function getAnalyticalClassInfo(id, accessToken) {
   const url = `${API_HOST}/api/v1/classes/${id}`;
   const options = {
     method: "GET",
@@ -38,4 +38,9 @@ export function unregisterAthleteToClass(athleteId, classId, accessToken) {
     body: JSON.stringify({}),
   };
   return fetch(url, options).then(handleResponse).catch(handleError);
+}
+
+export function getCrossfitClassesInfo() {
+  const url = `${API_HOST}/api/v1/classes/info`;
+  return fetch(url).then(handleResponse).catch(handleError);
 }

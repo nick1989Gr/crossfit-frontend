@@ -7,6 +7,8 @@ import AthletesTable from "./components/AthletesTable";
 import Instructors from "./components/Instructors";
 import Schedule from "./components/Schedule";
 import Profile from "./components/Profile";
+import Classes from "./components/Classes";
+import Achievements from "./components/Achievements";
 
 function App() {
   return (
@@ -22,8 +24,14 @@ function App() {
         <Route exact path="/instructors">
           <Instructors />
         </Route>
-        <Route exact path="/Schedule">
+        <Route exact path="/schedule">
           <Schedule />
+        </Route>
+        <Route exact path="/classes">
+          <Classes />
+        </Route>
+        <Route exact path="/achievements">
+          <Achievements />
         </Route>
         <Route exact path="/profile">
           <Profile />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  getClassInfo,
+  getAnalyticalClassInfo,
   registerAthleteToClass,
   unregisterAthleteToClass,
 } from "../api/crossfitClassesApi";
@@ -24,7 +24,7 @@ export const Registration = (props) => {
 
   async function updateClassInfo() {
     const accessToken = await getToken(getAccessTokenSilently);
-    getClassInfo(props.id, accessToken)
+    getAnalyticalClassInfo(props.id, accessToken)
       .then((r) => {
         setClassInfo(r);
         setLoading(false);
