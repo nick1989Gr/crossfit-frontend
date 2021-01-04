@@ -22,14 +22,15 @@ export const Registration = (props) => {
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  const updateClassInfo = () => {
-    getClassInfo(props.id)
+  async function updateClassInfo() {
+    const accessToken = await getToken(getAccessTokenSilently);
+    getClassInfo(props.id, accessToken)
       .then((r) => {
         setClassInfo(r);
         setLoading(false);
       })
       .catch((e) => setError(e));
-  };
+  }
 
   useEffect(() => {
     updateClassInfo();
