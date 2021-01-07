@@ -1,10 +1,59 @@
-# Getting Started with Create React App
+# Crossfit App - React Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a pet project for the frontend of a crossfit application.
+The application has the following functionalities:
+
+- A user can log in using Oauth2 and OpenID (Auth0 is being used as authentication and authorization server)
+- A authorized user can see all the registered athletes
+- A user can get information about the instructors and their specialties
+- A user can get information about the existing classes
+- A user can see information about his current profile
+- An authorized user can see the schedule of the week:
+  - can see the available spots in the class
+  - can see other athletes registered in the class
+  - can register himself in the class
+  - can deregister himself from the class
+
+This frontend makes calls to a crossfit backend that handles a database with all the data required. Make sure that you update the globalVars.js file in the root directory. API_HOST and AUDIENCE variables should point to the backend service. The latter variable referes to authentication audience, meaning the resource server. The former is used for the api calls made to the crossfit backend.
+
+## Views
+
+### Home page view:
+
+![image](https://user-images.githubusercontent.com/34338768/103912088-26a68400-5107-11eb-8e91-45d70fbcd89e.png)
+
+### Signing in view - Auth0 login:
+
+![image](https://user-images.githubusercontent.com/34338768/103912155-3b831780-5107-11eb-9e57-7d9d4e377f4b.png)
+
+### Callendar View:
+
+![image](https://user-images.githubusercontent.com/34338768/103911513-6caf1800-5106-11eb-9032-94c2b3c3c5ba.png)
+
+### Signing in a class
+
+![image](https://user-images.githubusercontent.com/34338768/103911823-cfa0af00-5106-11eb-816f-a038f5523ba0.png)
+![image](https://user-images.githubusercontent.com/34338768/103911753-b4ce3a80-5106-11eb-8d4e-98f0a648ed68.png)
+
+### Looking for classes that a user is registered
+
+![image](https://user-images.githubusercontent.com/34338768/103911978-024aa780-5107-11eb-8f0c-eddd261c77ff.png)
+
+## TODO List
+
+- Achievements page:
+  - The user will be able to add new achievements and retrieve his data from the backend
+  - The user can compare to other athletes achievements
+- Currently we do not support new registrations
+- bug: when going back to the previous year calendar gets messed up
 
 ## How to setup an auth0 account
 
-https://auth0.com/docs/quickstart/spa/react
+In order to have all the functionality needed for this frontend app you need
+to create a new account in [Auth0](https://auth0.com/). Then you need to create a new domain
+in order to get a clientId. You can configure your domain with a redirect uri.
+This is the URL that will get called once authentication is finsihed. For
+more information on how to setup your account follow the instructions in auth0 [quick start guide](https://auth0.com/docs/quickstart/spa/react).
 
 ## Available Scripts
 
