@@ -18,6 +18,7 @@ ReactDOM.render(
         redirectUri="http://localhost:3000/"
         audience={AUDIENCE}
         scope="read:classes"
+        useRefreshTokens={true}
       >
         <App />
       </Auth0Provider>

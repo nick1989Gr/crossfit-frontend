@@ -12,7 +12,6 @@ import BorderColorIcon from "@material-ui/icons/BorderColor";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { Button } from "@material-ui/core/";
 import Alert from "@material-ui/lab/Alert";
-import { currentUserId } from "../globalVars";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getToken } from "../utils/authenticationUtils.js";
 
@@ -97,7 +96,7 @@ export const Registration = (props) => {
   const getRegisterButton = () => {
     return (
       <>
-        {classInfo.athletes.some((a) => a.id === currentUserId) ? (
+        {classInfo.athletes.some((a) => a.id === props.userId) ? (
           <>
             <Alert severity="success">You are enrolled for this class</Alert>
             <Button
@@ -134,7 +133,7 @@ export const Registration = (props) => {
 
   async function registerAthlete() {
     const accessToken = await getToken(getAccessTokenSilently);
-    registerAthleteToClass(currentUserId, classInfo.id, accessToken)
+    registerAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
@@ -143,7 +142,7 @@ export const Registration = (props) => {
 
   async function unregisterAthlete() {
     const accessToken = await getToken(getAccessTokenSilently);
-    unregisterAthleteToClass(currentUserId, classInfo.id, accessToken)
+    unregisterAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;

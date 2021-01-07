@@ -30,9 +30,9 @@ import Loading from "../components/misc/Loading";
 import LoginAlert from "../components/misc/LoginAlert";
 import { getScheduleForAthlete } from "../api/scheduleApi";
 import Registration from "./Registration";
-import { currentUserId } from "../globalVars";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getToken } from "../utils/authenticationUtils.js";
+import { getAthleteByEmail } from "../api/athleteApi";
 
 const WORKING_HOURS = [
   "10:00:00",
@@ -83,23 +83,26 @@ export const Schedule = () => {
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
   const [popup, setPopup] = useState({
     open: false,
     classId: null,
     availableSlots: null,
   });
 
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   async function updateSchedule() {
     const accessToken = await getToken(getAccessTokenSilently);
     const weekDays = getWeekDays(startDay);
-    getScheduleForAthlete(
-      weekDays[FIRST],
-      weekDays[LAST],
-      currentUserId,
-      accessToken
-    )
+    const id = await getAthleteByEmail(user.email, accessToken)
+      .then((r) => {
+        return r.id;
+      })
+      .catch((e) => setError(e));
+    setUserId(id);
+
+    getScheduleForAthlete(weekDays[FIRST], weekDays[LAST], id, accessToken)
       .then((r) => {
         setSchedule(r);
         setLoading(false);
@@ -113,11 +116,6 @@ export const Schedule = () => {
     updateSchedule();
     // eslint-disable-next-line
   }, [startDay]);
-
-  if (!isAuthenticated) return <LoginAlert />;
-  if (loading) return <Loading />;
-  if (error) throw error;
-  // console.log(schedule);
 
   const getButtonStyle = (buttonType, availableSlots) => {
     if (availableSlots === 0) buttonType = "no room left";
@@ -262,13 +260,17 @@ export const Schedule = () => {
             fullWidth={true}
           >
             <DialogContent>
-              <Registration id={popup.classId} />
+              <Registration id={popup.classId} userId={userId} />
             </DialogContent>
           </Dialog>
         )}
       </>
     );
   };
+
+  if (!isAuthenticated) return <LoginAlert />;
+  if (loading) return <Loading />;
+  if (error) throw error;
 
   return (
     <>
