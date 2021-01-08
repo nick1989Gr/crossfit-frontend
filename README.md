@@ -46,6 +46,7 @@ This frontend makes calls to a crossfit backend that handles a database with all
   - The user can compare to other athletes achievements
 - Currently we do not support new registrations
 - bug: when going back to the previous year calendar gets messed up
+- Add new classes instances
 
 ## How to setup an auth0 account
 
