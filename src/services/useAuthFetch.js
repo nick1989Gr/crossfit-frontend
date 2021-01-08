@@ -13,9 +13,7 @@ export function useAuthFetch(url) {
       try {
         const accessToken = await getAccessTokenSilently({
           audience: AUTH0_AUDIENCE,
-          scope: "read:athletes",
         });
-        console.log(accessToken);
 
         const options = {
           headers: {

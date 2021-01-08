@@ -56,6 +56,23 @@ in order to get a clientId. You can configure your domain with a redirect uri.
 This is the URL that will get called once authentication is finsihed. For
 more information on how to setup your account follow the instructions in auth0 [quick start guide](https://auth0.com/docs/quickstart/spa/react).
 
+Once you have created your application is time to create your API:
+
+- On the Auth0 dashboard select APIs from the left menu
+- Click on the create api button
+- Give a name for your API (meaning backend) and the API identifier. If you are running on localhost then you should use
+  http:localhost:port
+- Once the API is created click on it and go to settings. Under RBAC Settings enable RBAC and Add permissions in the access token
+  options. Both of them are needed in order to have specific permissions for certain resources.
+- Next step is to add a permission. Go on the permissions tab of your API and add read:athletes as a scope. This scope is used
+  in order to limit the amount of users that can read the athletes that are registered.
+
+After the first time you login in the application you, can add permissions to your user account:
+
+- Go to users & roles in the Auth0 dashboard
+- Click on your user and then click on permissions
+- There you can add the read:athletes scope
+
 ## Creating an .env file
 
 To run this frontend you need to create a .env file in the root directory. Then you
