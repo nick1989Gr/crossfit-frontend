@@ -21,7 +21,7 @@ export const Registration = (props) => {
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  async function updateClassInfo() {
+  const updateClassInfo = async (props) => {
     const accessToken = await getToken(getAccessTokenSilently);
     getAnalyticalClassInfo(props.id, accessToken)
       .then((r) => {
@@ -29,7 +29,7 @@ export const Registration = (props) => {
         setLoading(false);
       })
       .catch((e) => setError(e));
-  }
+  };
 
   useEffect(() => {
     updateClassInfo();
@@ -157,7 +157,6 @@ export const Registration = (props) => {
   if (loading) return <Loading />;
   if (error) throw error;
 
-  // Handle what happens in case of no space left
   return (
     <>
       <h1>

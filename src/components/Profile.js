@@ -22,29 +22,29 @@ const useStyles = makeStyles(() => ({
 
 const Profile = () => {
   const classes = useStyles();
-  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [athlete, setAthlete] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  async function updateAthlete() {
-    const accessToken = await getToken(getAccessTokenSilently);
-    getAthleteByEmail(user.email, accessToken)
-      .then((r) => {
-        setAthlete(r);
-        setLoading(false);
-      })
-      .catch((e) => setError(e));
-  }
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
+    const updateAthlete = async () =>{
+      const accessToken = await getToken(getAccessTokenSilently);
+      getAthleteByEmail(user.email, accessToken)
+        .then((r) => {
+          setAthlete(r);
+          setLoading(false);
+        })
+        .catch((e) => setError(e));
+    }
     updateAthlete();
+    // eslint-disable-next-line
   }, []);
 
   if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) throw error;
-  console.log(athlete);
+
   return (
     <div className={classes.root}>
       <Card

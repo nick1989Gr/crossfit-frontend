@@ -17,12 +17,6 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const images = {
-  wod: "../resources/images/wod.PNG",
-  weightLifting: "weight lifting",
-  calisthenics: "calisthenics",
-};
-
 export const Classes = () => {
   const [classInfo, setClassInfo] = useState([]);
   const classes = useStyles();

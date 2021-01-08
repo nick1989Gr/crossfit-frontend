@@ -92,17 +92,18 @@ export const Schedule = () => {
 
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  async function updateSchedule() {
+  const updateSchedule = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
-    const weekDays = getWeekDays(startDay);
-    const id = await getAthleteByEmail(user.email, accessToken)
-      .then((r) => {
-        return r.id;
-      })
-      .catch((e) => setError(e));
-    setUserId(id);
+    const athlete = await getAthleteByEmail(user.email, accessToken);
+    setUserId(athlete.id);
 
-    getScheduleForAthlete(weekDays[FIRST], weekDays[LAST], id, accessToken)
+    const weekDays = getWeekDays(startDay);
+    getScheduleForAthlete(
+      weekDays[FIRST],
+      weekDays[LAST],
+      athlete.id,
+      accessToken
+    )
       .then((r) => {
         setSchedule(r);
         setLoading(false);
@@ -110,7 +111,7 @@ export const Schedule = () => {
       .catch((error) => {
         setError(error);
       });
-  }
+  };
 
   useEffect(() => {
     updateSchedule();
