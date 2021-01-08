@@ -9,6 +9,7 @@ import Schedule from "./components/Schedule";
 import Profile from "./components/Profile";
 import Classes from "./components/Classes";
 import Achievements from "./components/Achievements";
+import NewAthlete from "./components/NewAthlete";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route exact path="/profile">
           <Profile />
+        </Route>
+        <Route exact path="/new_athlete">
+          <NewAthlete />
         </Route>
         <Route path="/">
           <PageNotFound />

@@ -28,7 +28,7 @@ const Profile = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    const updateAthlete = async () =>{
+    const updateAthlete = async () => {
       const accessToken = await getToken(getAccessTokenSilently);
       getAthleteByEmail(user.email, accessToken)
         .then((r) => {
@@ -36,7 +36,7 @@ const Profile = () => {
           setLoading(false);
         })
         .catch((e) => setError(e));
-    }
+    };
     updateAthlete();
     // eslint-disable-next-line
   }, []);
