@@ -21,7 +21,7 @@ export const Registration = (props) => {
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
-  const updateClassInfo = async (props) => {
+  const updateClassInfo = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     getAnalyticalClassInfo(props.id, accessToken)
       .then((r) => {
@@ -34,7 +34,7 @@ export const Registration = (props) => {
   useEffect(() => {
     updateClassInfo();
     // eslint-disable-next-line
-  }, []);
+  }, [props]);
 
   const getInstructorCard = () => {
     return (

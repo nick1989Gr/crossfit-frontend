@@ -14,7 +14,7 @@ The application has the following functionalities:
   - can register himself in the class
   - can deregister himself from the class
 
-This frontend makes calls to a crossfit backend that handles a database with all the data required. Make sure that you update the globalVars.js file in the root directory. API_HOST and AUDIENCE variables should point to the backend service. The latter variable referes to authentication audience, meaning the resource server. The former is used for the api calls made to the crossfit backend.
+This frontend makes calls to a crossfit backend that handles a database with all the data required. Make sure that you update the globalConsts.js file in the root directory. API_HOST and AUTH0_AUDIENCE variables should point to the backend service. The latter variable refers to authentication audience, meaning the resource server. The former is used for the api calls made to the crossfit backend.
 
 ## Views
 
@@ -54,6 +54,19 @@ to create a new account in [Auth0](https://auth0.com/). Then you need to create 
 in order to get a clientId. You can configure your domain with a redirect uri.
 This is the URL that will get called once authentication is finsihed. For
 more information on how to setup your account follow the instructions in auth0 [quick start guide](https://auth0.com/docs/quickstart/spa/react).
+
+## Creating an .env file
+
+To run this frontend you need to create a .env file in the root directory. Then you
+need to define the auth0 domain and client id. You can fetch those from your auth0 account after you choose the application that you created in the previous step. After
+creating the .env file do not forget to restart your development server so that the
+new enviromental variables are loaded. Below you can see a sample of the .env file.
+The values are random so please make sure that you add your own values.
+
+```
+REACT_APP_AUTH0_DOMAIN=your-application.eu.auth0.com
+REACT_APP_AUTH0_CLIENT_ID=I9McoPMQ4kxhKDUhlJ9NILvXNvBB6X58
+```
 
 ## Available Scripts
 

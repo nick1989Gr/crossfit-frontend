@@ -1,5 +1,5 @@
 import { handleResponse, handleError } from "./apiUtils";
-import { API_HOST } from "../globalVars";
+import { API_HOST } from "../globalConsts";
 
 export function getAthleteByEmail(email, accessToken) {
   const url = `${API_HOST}/api/v1/athletes/email?email=${email}`;

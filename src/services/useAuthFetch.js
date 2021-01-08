@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_HOST, AUDIENCE } from "../globalVars";
+import { API_HOST, AUTH0_AUDIENCE } from "../globalConsts";
 import { useAuth0 } from "@auth0/auth0-react";
 
 export function useAuthFetch(url) {
@@ -12,8 +12,10 @@ export function useAuthFetch(url) {
     async function getData() {
       try {
         const accessToken = await getAccessTokenSilently({
-          audience: AUDIENCE,
+          audience: AUTH0_AUDIENCE,
+          scope: "read:athletes",
         });
+        console.log(accessToken);
 
         const options = {
           headers: {
