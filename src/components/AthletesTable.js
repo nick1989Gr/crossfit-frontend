@@ -11,6 +11,7 @@ import {
 import { useAuthFetch } from "../services/useAuthFetch";
 import Loading from "../components/misc/Loading";
 import LoginAlert from "../components/misc/LoginAlert";
+import ErrorHandler from "../components/misc/ErrorHandler";
 
 const useStyles = makeStyles({
   container: {
@@ -44,7 +45,7 @@ export const AthletesTable = () => {
 
   if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
-  if (error) throw error;
+  if (error) return <ErrorHandler error={error} />;
 
   return (
     <TableContainer className={classes.container}>
