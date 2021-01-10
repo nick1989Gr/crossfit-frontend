@@ -48,7 +48,7 @@ export const AthletesTable = () => {
   if (error) return <ErrorHandler error={error} />;
 
   return (
-    <TableContainer className={classes.container}>
+    <TableContainer className={classes.container}  data-testid="table-container">
       <Table className={classes.table} aria-label="simple table">
         <TableHead className={classes.tableHeader}>
           <TableRow>

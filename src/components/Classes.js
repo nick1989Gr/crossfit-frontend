@@ -28,8 +28,8 @@ export const Classes = () => {
 
   return (
     <>
-      <h1> About our classes</h1>
-      <Grid container spacing={1}>
+      <h1 data-testid="h1"> About our classes</h1>
+      <Grid container spacing={1} data-testid="class-grid">
         <Grid container item xs={12} spacing={1}>
           {classInfo.map((c) => (
             <Grid item xs={3} key={c.id}>

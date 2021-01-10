@@ -16,7 +16,7 @@ export const ErrorHandler = (props) => {
     }
   }, [props]);
 
-  return <Alert severity="error">{message}</Alert>;
+  return <Alert severity="error" data-testid="error-handler">{message}</Alert>;
 };
 
 export default ErrorHandler;
