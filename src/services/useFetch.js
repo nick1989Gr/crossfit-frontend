@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { API_HOST } from "../globalVars";
+import { API_HOST } from "../globalConsts";
 
 export function useFetch(url, requestedOptions = {}) {
   const [data, setData] = useState(null);

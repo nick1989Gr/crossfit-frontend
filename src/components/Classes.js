@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getCrossfitClassesInfo } from "../api/crossfitClassesApi";
 import { makeStyles } from "@material-ui/core/styles";
 import wod from "../resources/images/wod.PNG";
 import { Card } from "semantic-ui-react";
 import Grid from "@material-ui/core/Grid";
+import { useFetch } from "../services/useFetch";
+import { API_HOST } from "../globalConsts";
+import Loading from "../components/misc/Loading";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -18,16 +20,11 @@ const useStyles = makeStyles(() => ({
 }));
 
 export const Classes = () => {
-  const [classInfo, setClassInfo] = useState([]);
   const classes = useStyles();
+  const { data: classInfo, loading, error } = useFetch("/api/v1/classes/info");
 
-  useEffect(() => {
-    getCrossfitClassesInfo()
-      .then((r) => setClassInfo(r))
-      .catch((e) => {
-        throw e;
-      });
-  }, []);
+  if (loading) return <Loading />;
+  if (error) throw error;
 
   return (
     <>
