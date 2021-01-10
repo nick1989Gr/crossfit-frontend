@@ -31,8 +31,8 @@ export const Instructors = () => {
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={2}>
+      <Grid container spacing={1} >
+        <Grid container item xs={12} spacing={2} data-testid="instructors-grid">
           {instructors.map((instructor) => (
             <Grid item xs={4} key={instructor.id}>
               <Card
