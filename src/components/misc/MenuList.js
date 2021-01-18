@@ -77,7 +77,7 @@ export default function TitlebarGridList() {
       <GridList cellHeight={getCellHeight()} spacing={30} cols={getCols()}>
         <GridListTile
           key="Subheader"
-          cols={3}
+          cols={getCols()}
           style={{ height: "auto" }}
         ></GridListTile>
         {menuItems.map((tile) => (
