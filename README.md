@@ -48,6 +48,18 @@ This frontend makes calls to a crossfit backend that handles a database with all
 - bug: when going back to the previous year calendar gets messed up
 - Add new classes instances
 
+## How to use run the Crossfit frontend as a container
+
+If you already have docker installed on your machine execute the following cmds:
+
+```
+// In the root folder
+// You can build your own image using this command:
+docker image build -t <docker_id>/<docker_repo>:crossfit-fronend .
+// Run the container
+docker container run -d --name crossfit-frontend -p 3000:3000 <docker_id>/<docker_repo>:crossfit-fronend
+```
+
 ## How to setup an auth0 account
 
 In order to have all the functionality needed for this frontend app you need
