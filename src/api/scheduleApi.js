@@ -1,8 +1,4 @@
-import {
-  handleResponse,
-  handleError,
-  getOptionHeadersForPost,
-} from "./apiUtils";
+import { postWithAxios } from "./apiUtils";
 import { API_HOST } from "../globalConsts";
 
 export const getScheduleForAthlete = (start, end, athleteId, accessToken) => {
@@ -11,6 +7,5 @@ export const getScheduleForAthlete = (start, end, athleteId, accessToken) => {
     start,
     end,
   };
-  const options = getOptionHeadersForPost(accessToken, body);
-  return fetch(url, options).then(handleResponse).catch(handleError);
+  return postWithAxios(url, body, accessToken);
 };

@@ -1,57 +1,4 @@
-import { HTTPMethod } from "http-method-enum";
 import axios from "axios";
-
-export const handleResponse = async (response) => {
-  if (response.ok) return response.json();
-  if (response.status === 400) {
-    // So, a server-side validation error occurred.
-    // Server side validation returns a string error message, so parse as text instead of json.
-    const error = await response.text();
-    throw new Error(error);
-  }
-  throw new Error("Network response was not ok.");
-};
-
-export const handleResponseAndStatusCode = async (response) => {
-  if (response.ok) return response.json();
-  throw new Error(response.status);
-};
-
-export const handleError = (error) => {
-  throw error;
-};
-
-export const getOptionHeadersForGet = (accessToken) => {
-  return {
-    method: HTTPMethod.GET,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-  };
-};
-
-export const getOptionHeadersForDelete = (accessToken) => {
-  return {
-    method: HTTPMethod.DELETE,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify({}),
-  };
-};
-
-export const getOptionHeadersForPost = (accessToken, body) => {
-  return {
-    method: HTTPMethod.POST,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(body),
-  };
-};
 
 export const getWithAxios = async (url, accessToken) => {
   return axios.get(url, {
@@ -65,11 +12,9 @@ export const deleteWithAxios = async (url, accessToken) => {
   });
 };
 
-export const postWithAxios = async (url, accessToken, body) => {
-  return axios.post(url, {
-    method: HTTPMethod.POST,
+export const postWithAxios = async (url, body, accessToken) => {
+  return axios.post(url, body, {
     headers: getSecurityHeaders(accessToken),
-    body: JSON.stringify(body),
   });
 };
 

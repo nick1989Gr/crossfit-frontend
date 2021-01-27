@@ -46,7 +46,7 @@ export const TitlebarGridList = () => {
           setMenuItems(menuItemsForAthlete);
         })
         .catch((error) => {
-          if (error.message === NO_ATHLETE_FOUND_WITH_EMAIL_ADR) {
+          if (error.response.status === NO_ATHLETE_FOUND_WITH_EMAIL_ADR) {
             setMenuItems(menuItemsForNewUser);
           } else {
             throw error;

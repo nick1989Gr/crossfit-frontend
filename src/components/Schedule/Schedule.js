@@ -66,7 +66,7 @@ export const Schedule = () => {
       accessToken
     )
       .then((r) => {
-        setSchedule(r);
+        setSchedule(r.data);
         setLoading(false);
       })
       .catch((error) => {
