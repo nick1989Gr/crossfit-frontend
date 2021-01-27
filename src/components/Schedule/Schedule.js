@@ -70,7 +70,7 @@ export const Schedule = () => {
         setLoading(false);
       })
       .catch((error) => {
-        setError(error);
+        setError(new Error(error.response.status));
       });
   };
 

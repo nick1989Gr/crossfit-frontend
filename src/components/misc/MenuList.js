@@ -49,7 +49,7 @@ export const TitlebarGridList = () => {
           if (error.response.status === NO_ATHLETE_FOUND_WITH_EMAIL_ADR) {
             setMenuItems(menuItemsForNewUser);
           } else {
-            throw error;
+            throw new Error(error.response.status);
           }
         });
     };

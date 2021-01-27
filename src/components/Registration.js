@@ -22,7 +22,7 @@ export const Registration = (props) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const PERSONA_IMG =
     "https://react.semantic-ui.com/images/avatar/large/steve.jpg";
-    
+
   const updateClassInfo = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     await getAnalyticalClassInfo(props.id, accessToken)
@@ -30,7 +30,7 @@ export const Registration = (props) => {
         setClassInfo(r.data);
         setLoading(false);
       })
-      .catch((e) => setError(e));
+      .catch((e) => setError(new Error(e.response.status)));
   };
 
   useEffect(() => {
@@ -130,7 +130,7 @@ export const Registration = (props) => {
     registerAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
-        throw e;
+        throw new Error(error.response.status);
       });
   };
 
@@ -139,7 +139,7 @@ export const Registration = (props) => {
     unregisterAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
-        throw e;
+        throw new Error(error.response.status);
       });
   };
 
