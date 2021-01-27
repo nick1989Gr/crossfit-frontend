@@ -20,7 +20,7 @@ const Profile = () => {
       const accessToken = await getToken(getAccessTokenSilently);
       getAthleteByEmail(user.email, accessToken)
         .then((r) => {
-          setAthlete(r);
+          setAthlete(r.data);
           setLoading(false);
         })
         .catch((e) => setError(e));

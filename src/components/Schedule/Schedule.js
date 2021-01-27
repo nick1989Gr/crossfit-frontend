@@ -56,13 +56,13 @@ export const Schedule = () => {
   const updateSchedule = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     const athlete = await getAthleteByEmail(user.email, accessToken);
-    setUserId(athlete.id);
+    setUserId(athlete.data.id);
 
     const weekDays = getWeekDays(startDay);
     getScheduleForAthlete(
       weekDays[FIRST],
       weekDays[LAST],
-      athlete.id,
+      athlete.data.id,
       accessToken
     )
       .then((r) => {

@@ -22,11 +22,12 @@ export const Registration = (props) => {
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const PERSONA_IMG =
     "https://react.semantic-ui.com/images/avatar/large/steve.jpg";
+    
   const updateClassInfo = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
-    getAnalyticalClassInfo(props.id, accessToken)
+    await getAnalyticalClassInfo(props.id, accessToken)
       .then((r) => {
-        setClassInfo(r);
+        setClassInfo(r.data);
         setLoading(false);
       })
       .catch((e) => setError(e));

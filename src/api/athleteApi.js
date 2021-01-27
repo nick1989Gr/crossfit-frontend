@@ -1,14 +1,7 @@
-import {
-  getOptionHeadersForGet,
-  handleResponseAndStatusCode,
-  handleError,
-} from "./apiUtils";
+import { getWithAxios } from "./apiUtils";
 import { API_HOST } from "../globalConsts";
 
 export const getAthleteByEmail = (email, accessToken) => {
   const url = `${API_HOST}/api/v1/athletes/email?email=${email}`;
-  const options = getOptionHeadersForGet(accessToken);
-  return fetch(url, options)
-    .then(handleResponseAndStatusCode)
-    .catch(handleError);
+  return getWithAxios(url, accessToken);
 };

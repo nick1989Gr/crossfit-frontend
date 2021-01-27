@@ -1,4 +1,5 @@
 import { HTTPMethod } from "http-method-enum";
+import axios from "axios";
 
 export const handleResponse = async (response) => {
   if (response.ok) return response.json();
@@ -49,5 +50,32 @@ export const getOptionHeadersForPost = (accessToken, body) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify(body),
+  };
+};
+
+export const getWithAxios = async (url, accessToken) => {
+  return axios.get(url, {
+    headers: getSecurityHeaders(accessToken),
+  });
+};
+
+export const deleteWithAxios = async (url, accessToken) => {
+  return axios.delete(url, {
+    headers: getSecurityHeaders(accessToken),
+  });
+};
+
+export const postWithAxios = async (url, accessToken, body) => {
+  return axios.post(url, {
+    method: HTTPMethod.POST,
+    headers: getSecurityHeaders(accessToken),
+    body: JSON.stringify(body),
+  });
+};
+
+const getSecurityHeaders = (accessToken) => {
+  return {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${accessToken}`,
   };
 };

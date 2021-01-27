@@ -29,7 +29,9 @@ export const AthletesTable = () => {
         <TableHead className={classes.tableHeader}>
           <TableRow>
             {athletesFields.map((field) => (
-              <TableCell className={classes.headerCell}>{field}</TableCell>
+              <TableCell key={field} className={classes.headerCell}>
+                {field}
+              </TableCell>
             ))}
           </TableRow>
         </TableHead>
