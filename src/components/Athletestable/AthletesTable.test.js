@@ -1,7 +1,7 @@
 import { render, screen, cleanup } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import AthletesTable from "./AthletesTable";
-import { useAuthFetch } from "../services/useAuthFetch";
+import { useAuthFetch } from "../../services/useAuthFetch";
 import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("../services/useAuthFetch");

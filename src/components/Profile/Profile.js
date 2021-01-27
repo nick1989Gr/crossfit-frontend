@@ -1,27 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import LoginAlert from "../components/misc/LoginAlert";
+import LoginAlert from "../misc/LoginAlert";
 import { Card } from "semantic-ui-react";
-import { makeStyles } from "@material-ui/core/styles";
-import { getToken } from "../utils/authenticationUtils.js";
-import Loading from "../components/misc/Loading";
-import { getAthleteByEmail } from "../api/athleteApi";
-import { formatDate } from "../utils/dateUtils";
-
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  card: {
-    textAlign: "center",
-    top: 20,
-    left: "40%",
-    marginLeft: 20,
-  },
-}));
+import { useProfileStyles } from "./ProfileMisc";
+import { getToken } from "../../utils/authenticationUtils.js";
+import Loading from "../misc/Loading";
+import { getAthleteByEmail } from "../../api/athleteApi";
+import { formatDate } from "../../utils/dateUtils";
 
 const Profile = () => {
-  const classes = useStyles();
+  const classes = useProfileStyles();
   const [athlete, setAthlete] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);

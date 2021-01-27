@@ -3,11 +3,11 @@ import PageNotFound from "./components/misc/PageNotFound";
 import NavigationBar from "./components/misc/NavigationBar";
 import { Switch, Route } from "react-router-dom";
 import MenuList from "./components/misc/MenuList";
-import AthletesTable from "./components/AthletesTable";
-import Instructors from "./components/Instructors";
-import Schedule from "./components/Schedule";
-import Profile from "./components/Profile";
-import Classes from "./components/Classes";
+import AthletesTable from "./components/Athletestable/AthletesTable";
+import Instructors from "./components/Instructors/Instructors";
+import Schedule from "./components/Schedule/Schedule";
+import Profile from "./components/Profile/Profile";
+import Classes from "./components/Classes/Classes";
 import Achievements from "./components/Achievements";
 import NewAthlete from "./components/NewAthlete";
 

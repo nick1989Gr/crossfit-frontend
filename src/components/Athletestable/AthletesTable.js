@@ -6,50 +6,18 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  makeStyles,
 } from "@material-ui/core/";
-import { useAuthFetch } from "../services/useAuthFetch";
-import Loading from "../components/misc/Loading";
-import LoginAlert from "../components/misc/LoginAlert";
-import ErrorHandler from "../components/misc/ErrorHandler";
-
-const useStyles = makeStyles({
-  container: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    position: "relative",
-    overflow: "visible ",
-  },
-  table: {
-    minWidth: 50,
-    maxWidth: 850,
-    border: "2px solid black",
-    marginLeft: "auto",
-    marginRight: "auto",
-    position: "relative",
-    top: 20,
-  },
-  tableHeader: {
-    backgroundColor: "#484648",
-  },
-  headerCell: {
-    color: "#FFFFFF",
-  },
-});
+import { useAuthFetch } from "../../services/useAuthFetch";
+import Loading from "../misc/Loading";
+import LoginAlert from "../misc/LoginAlert";
+import ErrorHandler from "../misc/ErrorHandler";
+import { useAthleteTableStyles, athletesFields } from "./AthletesTableMisc";
 
 export const AthletesTable = () => {
-  const classes = useStyles();
+  const classes = useAthleteTableStyles();
   const { data: athletes, loading, error, isAuthenticated } = useAuthFetch(
     "/api/v1/athletes"
   );
-  const athletesFields = [
-    "First name",
-    "Last name",
-    "Date of Birth",
-    "Enrolled Date",
-    "Phone number",
-    "Email address",
-  ];
 
   if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;

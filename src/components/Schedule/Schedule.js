@@ -6,7 +6,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  makeStyles,
   Button,
   Dialog,
   DialogContent,
@@ -25,60 +24,22 @@ import {
   getWeekDays,
   FIRST,
   LAST,
-} from "../utils/dateUtils";
-import Loading from "../components/misc/Loading";
-import LoginAlert from "../components/misc/LoginAlert";
-import { getScheduleForAthlete } from "../api/scheduleApi";
-import Registration from "./Registration";
+} from "../../utils/dateUtils";
+import Loading from "../misc/Loading";
+import LoginAlert from "../misc/LoginAlert";
+import { getScheduleForAthlete } from "../../api/scheduleApi";
+import Registration from "../Registration";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getToken } from "../utils/authenticationUtils.js";
-import { getAthleteByEmail } from "../api/athleteApi";
-
-const WORKING_HOURS = [
-  "10:00:00",
-  "11:00:00",
-  "12:00:00",
-  "13:00:00",
-  "14:00:00",
-  "15:00:00",
-  "16:00:00",
-  "17:00:00",
-  "18:00:00",
-  "19:00:00",
-  "20:00:00",
-  "21:00:00",
-];
-const useStyles = makeStyles({
-  container: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    position: "relative",
-    overflow: "visible ",
-  },
-  table: {
-    minWidth: 50,
-    maxWidth: 850,
-    border: "2px solid black",
-    marginLeft: "auto",
-    marginRight: "auto",
-    position: "relative",
-    top: 20,
-  },
-  tableHeader: {
-    backgroundColor: "#424242",
-  },
-  headerCell: {
-    color: "#FFFFFF",
-    textAlign: "center",
-    fontWeight: "bold",
-  },
-  button: {
-    margin: 1,
-  },
-});
+import { getToken } from "../../utils/authenticationUtils.js";
+import { getAthleteByEmail } from "../../api/athleteApi";
+import {
+  useScheduleStyles,
+  getButtonStyle,
+  WORKING_HOURS,
+} from "./ScheduleMisc";
 
 export const Schedule = () => {
-  const classes = useStyles();
+  const classes = useScheduleStyles();
   const [startDay, setStartDay] = useState(new Date());
   const [schedule, setSchedule] = useState(null);
   const [error, setError] = useState(null);
@@ -117,38 +78,6 @@ export const Schedule = () => {
     updateSchedule();
     // eslint-disable-next-line
   }, [startDay]);
-
-  const getButtonStyle = (buttonType, availableSlots) => {
-    if (availableSlots === 0) buttonType = "no room left";
-    const noRoomButton = {
-      backgroundColor: "#ff5722",
-    };
-    const wodButton = {
-      backgroundColor: "#80cbc4",
-    };
-    const calisthenicsButton = {
-      backgroundColor: "#cddc39",
-    };
-    const weightLiftingButton = {
-      backgroundColor: "#43a047",
-    };
-    const defaultButton = {
-      backgroundColor: "#b39ddb",
-    };
-
-    switch (buttonType) {
-      case "wod":
-        return wodButton;
-      case "calisthenics":
-        return calisthenicsButton;
-      case "weight lifting":
-        return weightLiftingButton;
-      case "no room left":
-        return noRoomButton;
-      default:
-        return defaultButton;
-    }
-  };
 
   const getButtonIcon = (availableSlots, athleteIsEnrolled) => {
     if (athleteIsEnrolled) return <HowToRegIcon />;

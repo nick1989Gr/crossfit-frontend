@@ -20,7 +20,8 @@ export const Registration = (props) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-
+  const PERSONA_IMG =
+    "https://react.semantic-ui.com/images/avatar/large/steve.jpg";
   const updateClassInfo = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     getAnalyticalClassInfo(props.id, accessToken)
@@ -44,11 +45,7 @@ export const Registration = (props) => {
           return (
             <Card key={instructor.id}>
               <Card.Content>
-                <Image
-                  floated="left"
-                  size="mini"
-                  src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-                />
+                <Image floated="left" size="mini" src={PERSONA_IMG} />
                 <Card.Header>
                   {instructor.firstName} {instructor.lastName}
                 </Card.Header>
@@ -72,11 +69,7 @@ export const Registration = (props) => {
               return (
                 <Card key={athlete.id}>
                   <Card.Content>
-                    <Image
-                      floated="left"
-                      size="mini"
-                      src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
-                    />
+                    <Image floated="left" size="mini" src={PERSONA_IMG} />
                     <Card.Header>
                       {athlete.firstName} {athlete.lastName}
                     </Card.Header>

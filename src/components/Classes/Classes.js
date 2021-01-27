@@ -1,25 +1,14 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import wod from "../resources/images/wod.PNG";
+
+import wod from "../../resources/images/wod.PNG";
 import { Card } from "semantic-ui-react";
 import Grid from "@material-ui/core/Grid";
-import { useFetch } from "../services/useFetch";
-import Loading from "../components/misc/Loading";
-
-const useStyles = makeStyles(() => ({
-  root: {
-    flexGrow: 1,
-  },
-  card: {
-    textAlign: "center",
-    top: 20,
-    left: "30%",
-    marginLeft: 20,
-  },
-}));
+import { useFetch } from "../../services/useFetch";
+import Loading from "../misc/Loading";
+import { useClassesStyles } from "./ClassesMisc";
 
 export const Classes = () => {
-  const classes = useStyles();
+  const classes = useClassesStyles();
   const { data: classInfo, loading, error } = useFetch("/api/v1/classes/info");
 
   if (loading) return <Loading />;
