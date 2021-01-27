@@ -19,30 +19,14 @@ function App() {
         <Route exact path="/">
           <MenuList />
         </Route>
-        <Route exact path="/athletes">
-          <AthletesTable />
-        </Route>
-        <Route exact path="/instructors">
-          <Instructors />
-        </Route>
-        <Route exact path="/schedule">
-          <Schedule />
-        </Route>
-        <Route exact path="/classes">
-          <Classes />
-        </Route>
-        <Route exact path="/achievements">
-          <Achievements />
-        </Route>
-        <Route exact path="/profile">
-          <Profile />
-        </Route>
-        <Route exact path="/new_athlete">
-          <NewAthlete />
-        </Route>
-        <Route path="/">
-          <PageNotFound />
-        </Route>
+        <Route exact path="/athletes" component={AthletesTable} />
+        <Route exact path="/instructors" component={Instructors} />
+        <Route exact path="/schedule" component={Schedule} />
+        <Route exact path="/classes" component={Classes} />
+        <Route exact path="/achievements" component={Achievements} />
+        <Route exact path="/profile" component={Profile} />
+        <Route exact path="/new_athlete" component={NewAthlete} />
+        <Route path="/" component={PageNotFound} />
       </Switch>
     </div>
   );
