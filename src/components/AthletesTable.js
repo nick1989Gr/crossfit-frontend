@@ -42,22 +42,27 @@ export const AthletesTable = () => {
   const { data: athletes, loading, error, isAuthenticated } = useAuthFetch(
     "/api/v1/athletes"
   );
+  const athletesFields = [
+    "First name",
+    "Last name",
+    "Date of Birth",
+    "Enrolled Date",
+    "Phone number",
+    "Email address",
+  ];
 
   if (!isAuthenticated) return <LoginAlert />;
   if (loading) return <Loading />;
   if (error) return <ErrorHandler error={error} />;
 
   return (
-    <TableContainer className={classes.container}  data-testid="table-container">
+    <TableContainer className={classes.container} data-testid="table-container">
       <Table className={classes.table} aria-label="simple table">
         <TableHead className={classes.tableHeader}>
           <TableRow>
-            <TableCell className={classes.headerCell}>First name</TableCell>
-            <TableCell className={classes.headerCell}>Last name</TableCell>
-            <TableCell className={classes.headerCell}>Date of Birth</TableCell>
-            <TableCell className={classes.headerCell}>Enrolled Date</TableCell>
-            <TableCell className={classes.headerCell}>Phone number</TableCell>
-            <TableCell className={classes.headerCell}>Email address</TableCell>
+            {athletesFields.map((field) => (
+              <TableCell className={classes.headerCell}>{field}</TableCell>
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
