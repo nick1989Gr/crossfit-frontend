@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function TitlebarGridList() {
+export const TitlebarGridList = () => {
   const classes = useStyles();
   let history = useHistory();
 
@@ -97,4 +97,6 @@ export default function TitlebarGridList() {
       </GridList>
     </div>
   );
-}
+};
+
+export default TitlebarGridList;

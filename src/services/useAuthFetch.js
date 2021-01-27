@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { API_HOST, AUTH0_AUDIENCE } from "../globalConsts";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export function useAuthFetch(url) {
+export const useAuthFetch = (url) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const { isAuthenticated, getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       try {
         const accessToken = await getAccessTokenSilently({
           audience: AUTH0_AUDIENCE,
@@ -33,11 +33,11 @@ export function useAuthFetch(url) {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     getData();
     // eslint-disable-next-line
   }, [url]);
 
   return { data, error, loading, isAuthenticated };
-}
+};

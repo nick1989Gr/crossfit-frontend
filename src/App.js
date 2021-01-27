@@ -11,7 +11,7 @@ import Classes from "./components/Classes";
 import Achievements from "./components/Achievements";
 import NewAthlete from "./components/NewAthlete";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <NavigationBar />
@@ -30,6 +30,6 @@ function App() {
       </Switch>
     </div>
   );
-}
+};
 
 export default App;

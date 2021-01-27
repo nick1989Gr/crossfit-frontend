@@ -131,23 +131,23 @@ export const Registration = (props) => {
     );
   };
 
-  async function registerAthlete() {
+  const registerAthlete = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     registerAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
       });
-  }
+  };
 
-  async function unregisterAthlete() {
+  const unregisterAthlete = async () => {
     const accessToken = await getToken(getAccessTokenSilently);
     unregisterAthleteToClass(props.userId, classInfo.id, accessToken)
       .then((r) => updateClassInfo())
       .catch((e) => {
         throw e;
       });
-  }
+  };
 
   const getAvailableSlots = () => {
     return classInfo.maxParticipants - classInfo.athletes.length;

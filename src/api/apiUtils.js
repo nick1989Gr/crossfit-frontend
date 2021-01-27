@@ -1,6 +1,6 @@
 import { HTTPMethod } from "http-method-enum";
 
-export async function handleResponse(response) {
+export const handleResponse = async (response) => {
   if (response.ok) return response.json();
   if (response.status === 400) {
     // So, a server-side validation error occurred.
@@ -9,18 +9,18 @@ export async function handleResponse(response) {
     throw new Error(error);
   }
   throw new Error("Network response was not ok.");
-}
+};
 
-export async function handleResponseAndStatusCode(response) {
+export const handleResponseAndStatusCode = async (response) => {
   if (response.ok) return response.json();
   throw new Error(response.status);
-}
+};
 
-export function handleError(error) {
+export const handleError = (error) => {
   throw error;
-}
+};
 
-export function getOptionHeadersForGet(accessToken) {
+export const getOptionHeadersForGet = (accessToken) => {
   return {
     method: HTTPMethod.GET,
     headers: {
@@ -28,9 +28,9 @@ export function getOptionHeadersForGet(accessToken) {
       Authorization: `Bearer ${accessToken}`,
     },
   };
-}
+};
 
-export function getOptionHeadersForDelete(accessToken) {
+export const getOptionHeadersForDelete = (accessToken) => {
   return {
     method: HTTPMethod.DELETE,
     headers: {
@@ -39,9 +39,9 @@ export function getOptionHeadersForDelete(accessToken) {
     },
     body: JSON.stringify({}),
   };
-}
+};
 
-export function getOptionHeadersForPost(accessToken, body) {
+export const getOptionHeadersForPost = (accessToken, body) => {
   return {
     method: HTTPMethod.POST,
     headers: {
@@ -50,4 +50,4 @@ export function getOptionHeadersForPost(accessToken, body) {
     },
     body: JSON.stringify(body),
   };
-}
+};

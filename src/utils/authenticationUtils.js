@@ -1,6 +1,6 @@
 import { AUTH0_AUDIENCE } from "../globalConsts";
 
-export async function getToken(getAccessTokenSilently) {
+export const getToken = async (getAccessTokenSilently) => {
   try {
     const accessToken = await getAccessTokenSilently({
       audience: AUTH0_AUDIENCE,
@@ -9,4 +9,4 @@ export async function getToken(getAccessTokenSilently) {
   } catch (e) {
     throw e;
   }
-}
+};

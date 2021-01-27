@@ -3,7 +3,7 @@ export const FIRST = 0;
 export const LAST = NUM_WEEK_DAYS - 1;
 
 // Formats date to Day dd Mon
-export function formatDateVerbose(d) {
+export const formatDateVerbose = (d) => {
   const months = [
     "JAN",
     "FEB",
@@ -20,9 +20,9 @@ export function formatDateVerbose(d) {
   ];
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[d.getDay()] + " " + d.getDate() + " " + months[d.getMonth()];
-}
+};
 
-export function formatDate(date) {
+export const formatDate = (date) => {
   var d = new Date(date),
     month = "" + (d.getMonth() + 1),
     day = "" + d.getDate(),
@@ -32,14 +32,14 @@ export function formatDate(date) {
   if (day.length < 2) day = "0" + day;
 
   return [year, month, day].join("-");
-}
+};
 
 // Takes a date and retuns the time as HH:MM:SS
-export function formatTime(date) {
+export const formatTime = (date) => {
   return date.toTimeString().split(" ")[0];
-}
+};
 
-export function getWeekDays(startDay) {
+export const getWeekDays = (startDay) => {
   let days = [];
   days[0] = new Date(startDay);
   for (let i = 1; i < NUM_WEEK_DAYS; i++) {
@@ -47,14 +47,14 @@ export function getWeekDays(startDay) {
     days[i].setDate(startDay.getDate() + i);
   }
   return days;
-}
+};
 
-export function getNextWeekDate(d) {
+export const getNextWeekDate = (d) => {
   let ts = new Date().setDate(d.getDate() + NUM_WEEK_DAYS);
   return new Date(ts);
-}
+};
 
-export function getPreviousWeekDate(d) {
+export const getPreviousWeekDate = (d) => {
   let ts = new Date().setDate(d.getDate() - NUM_WEEK_DAYS);
   return new Date(ts);
-}
+};

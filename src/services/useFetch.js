@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import { API_HOST } from "../globalConsts";
 
-export function useFetch(url, requestedOptions = {}) {
+export const useFetch = (url, requestedOptions = {}) => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function getData() {
+    const getData = async () => {
       try {
         const response = await fetch(API_HOST + url, requestedOptions);
         if (response.ok) {
@@ -21,11 +21,11 @@ export function useFetch(url, requestedOptions = {}) {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
     getData();
     // eslint-disable-next-line
   }, [url]);
 
   return { data, error, loading };
-}
+};
