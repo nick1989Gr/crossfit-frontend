@@ -12,6 +12,12 @@ export const EXERCISES_COLORS = {
   Burpees: "#E323F6",
 };
 
+export const EXERCISES_COLORS_MARKS = {
+  Snatch: "#0B7C16",
+  Clean: "#0B9693",
+  Burpees: "#93189F",
+};
+
 export const useAchievementsStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,

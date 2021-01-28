@@ -9,6 +9,7 @@ import {
   getTopAchievementsForExercise,
 } from "../../api/achievementsApi";
 import BarGraph from "../Graphs/BarGraph.js";
+import AthleteAchievementsGraph from "../Graphs/AthleteAchievementsGraph.js";
 import Grid from "@material-ui/core/Grid";
 import {
   useAchievementsStyles,
@@ -18,7 +19,6 @@ import {
 
 export const Achievements = () => {
   const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [id, setId] = useState(null);
   const [exercises, setExercises] = useState([]);
   const [athleteAchievements, setAthleteAchievements] = useState({});
   const [error, setError] = useState(null);
@@ -31,7 +31,6 @@ export const Achievements = () => {
       const accessToken = await getToken(getAccessTokenSilently);
 
       const athlete = await getAthleteByEmail(user.email, accessToken);
-      setId(athlete.data.id);
 
       const promises = [
         getTopAchievementsForExercise(EXERCISES.SNATCH, accessToken),
@@ -83,6 +82,8 @@ export const Achievements = () => {
           </Grid>
         </Grid>
       </Grid>
+      <h2 className={classes.h2}>Athlete Achievements</h2>
+      <AthleteAchievementsGraph data={athleteAchievements} />
     </>
   );
 };

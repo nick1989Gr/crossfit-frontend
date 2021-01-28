@@ -16,6 +16,9 @@
 .main-fonts {
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
+.text-aligned-center {
+  text-align: center;
+}
 
 @keyframes App-logo-spin {
   from {
