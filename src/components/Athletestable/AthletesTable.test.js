@@ -4,7 +4,7 @@ import AthletesTable from "./AthletesTable";
 import { useAuthFetch } from "../../services/useAuthFetch";
 import "@testing-library/jest-dom/extend-expect";
 
-jest.mock("../services/useAuthFetch");
+jest.mock("../../services/useAuthFetch");
 
 const MOCK_ATHLETES = [
   {

@@ -8,7 +8,7 @@ import Instructors from "./components/Instructors/Instructors";
 import Schedule from "./components/Schedule/Schedule";
 import Profile from "./components/Profile/Profile";
 import Classes from "./components/Classes/Classes";
-import Achievements from "./components/Achievements";
+import Achievements from "./components/Achievements/Achievements";
 import NewAthlete from "./components/NewAthlete";
 
 const App = () => {

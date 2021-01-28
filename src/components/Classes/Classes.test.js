@@ -4,7 +4,7 @@ import Classes from "./Classes";
 import { useFetch } from "../../services/useFetch";
 import "@testing-library/jest-dom/extend-expect";
 
-jest.mock("../services/useFetch");
+jest.mock("../../services/useFetch");
 
 const MOCK_CLASSES = [
   {
