@@ -28,4 +28,17 @@ export const useAchievementsStyles = makeStyles((theme) => ({
     fontFamily: "Roboto",
     fontWeight: "normal",
   },
+  athleteAchievements: {
+    width: "70%",
+    marginLeft: "auto",
+    marginRight: "auto",
+    position: "relative",
+    marginTop: 50,
+  },
+  topExercise: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    position: "relative",
+    marginTop: 50,
+  },
 }));

@@ -11,6 +11,7 @@ import {
 import BarGraph from "../Graphs/BarGraph.js";
 import AthleteAchievementsGraph from "../Graphs/AthleteAchievementsGraph.js";
 import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import {
   useAchievementsStyles,
   EXERCISES_COLORS,
@@ -67,23 +68,27 @@ export const Achievements = () => {
     <>
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
-          <Grid container justify="center" spacing={0}>
+          <Grid container justify="center" spacing={2}>
             {exercises.map((exercise) => (
               <Grid key={exercise.exerciseName} item>
-                <h2
-                  className={classes.h2}
-                >{`Top ${exercise.exerciseName} athletes`}</h2>
-                <BarGraph
-                  data={exercise}
-                  color={EXERCISES_COLORS[exercise.exerciseName]}
-                />
+                <Paper className={classes.topExercise} elevation={3}>
+                  <h2
+                    className={classes.h2}
+                  >{`Top ${exercise.exerciseName} athletes`}</h2>
+                  <BarGraph
+                    data={exercise}
+                    color={EXERCISES_COLORS[exercise.exerciseName]}
+                  />
+                </Paper>
               </Grid>
             ))}
           </Grid>
         </Grid>
       </Grid>
-      <h2 className={classes.h2}>Athlete Achievements</h2>
-      <AthleteAchievementsGraph data={athleteAchievements} />
+      <Paper className={classes.athleteAchievements} elevation={3}>
+        <h2 className={classes.h2}>Athlete Achievements</h2>
+        <AthleteAchievementsGraph data={athleteAchievements} />
+      </Paper>
     </>
   );
 };
