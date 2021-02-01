@@ -18,7 +18,6 @@ export const BarGraph = (props) => {
     return [];
   };
 
-  console.log(JSON.stringify(props));
   return (
     <>
       <div data-testid="bar-graph">

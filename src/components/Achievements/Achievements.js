@@ -65,7 +65,7 @@ export const Achievements = () => {
   if (error) throw error;
 
   return (
-    <>
+    <div data-testid="achievements">
       <Grid container className={classes.root} spacing={2}>
         <Grid item xs={12}>
           <Grid container justify="center" spacing={2}>
@@ -89,7 +89,7 @@ export const Achievements = () => {
         <h2 className={classes.h2}>Athlete Achievements</h2>
         <AthleteAchievementsGraph data={athleteAchievements} />
       </Paper>
-    </>
+    </div>
   );
 };
 
