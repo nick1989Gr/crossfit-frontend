@@ -70,6 +70,5 @@ export const menuItemsForNewUser = [
   athletes,
   instructors,
   classes,
-  achievements,
   registerAthlete,
 ];

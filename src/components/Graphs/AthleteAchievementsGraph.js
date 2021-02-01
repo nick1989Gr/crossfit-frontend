@@ -14,8 +14,6 @@ import {
 import DiscreteColorLegend from "react-vis/dist/legends/discrete-color-legend";
 
 export const AthleteAchievementsGraph = (props) => {
-  console.log(props);
-
   const extractData = (data) => {
     return data.map((e) => {
       return { x: formatDate(e.ts), y: e.value };
@@ -33,7 +31,7 @@ export const AthleteAchievementsGraph = (props) => {
   };
 
   return (
-    <>
+    <div data-testid="athlete-achievements-plot">
       <XYPlot
         width={1200}
         height={400}
@@ -57,12 +55,14 @@ export const AthleteAchievementsGraph = (props) => {
           />
         ))}
       </XYPlot>
-      <DiscreteColorLegend
-        className="main-fonts text-aligned-center"
-        orientation="horizontal"
-        items={extractLegendLines(props.data)}
-      />
-    </>
+      <div data-testid="legend">
+        <DiscreteColorLegend
+          className="main-fonts text-aligned-center"
+          orientation="horizontal"
+          items={extractLegendLines(props.data)}
+        />
+      </div>
+    </div>
   );
 };
 

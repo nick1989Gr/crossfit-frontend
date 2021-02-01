@@ -1,8 +1,7 @@
-import { render, screen, cleanup } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import Classes from "./Classes";
 import { useFetch } from "../../services/useFetch";
-import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("../../services/useFetch");
 
