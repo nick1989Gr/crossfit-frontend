@@ -18,9 +18,10 @@ export const BarGraph = (props) => {
     return [];
   };
 
+  console.log(JSON.stringify(props));
   return (
     <>
-      <div data-testid="plot">
+      <div data-testid="bar-graph">
         <XYPlot
           colorType="literal"
           xType="ordinal"
