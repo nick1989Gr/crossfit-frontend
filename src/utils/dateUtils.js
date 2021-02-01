@@ -43,18 +43,19 @@ export const getWeekDays = (startDay) => {
   let days = [];
   days[0] = new Date(startDay);
   for (let i = 1; i < NUM_WEEK_DAYS; i++) {
-    days[i] = new Date();
-    days[i].setDate(startDay.getDate() + i);
+    days[i] = new Date(
+      startDay.getFullYear(),
+      startDay.getMonth(),
+      startDay.getDate() + i
+    );
   }
   return days;
 };
 
 export const getNextWeekDate = (d) => {
-  let ts = new Date().setDate(d.getDate() + NUM_WEEK_DAYS);
-  return new Date(ts);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() + NUM_WEEK_DAYS);
 };
 
 export const getPreviousWeekDate = (d) => {
-  let ts = new Date().setDate(d.getDate() - NUM_WEEK_DAYS);
-  return new Date(ts);
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate() - NUM_WEEK_DAYS);
 };
