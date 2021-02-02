@@ -28,7 +28,7 @@ import {
 import Loading from "../misc/Loading";
 import LoginAlert from "../misc/LoginAlert";
 import { getScheduleForAthlete } from "../../api/scheduleApi";
-import Registration from "../Registration";
+import Registration from "../Registration/Registration";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getToken } from "../../utils/authenticationUtils.js";
 import { getAthleteByEmail } from "../../api/athleteApi";
@@ -190,7 +190,7 @@ export const Schedule = () => {
             fullWidth={true}
           >
             <DialogContent>
-              <Registration id={popup.classId} userId={userId} />
+              <Registration classId={popup.classId} userId={userId} />
             </DialogContent>
           </Dialog>
         )}
